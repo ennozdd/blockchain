@@ -2,8 +2,10 @@ FROM python:3.9.1-alpine
 
 ENV  PYTHONUNBUFFERED 1
 
-
-
+RUN apk add --no-cache \
+            mariadb-connector-c-dev \
+            build-base \
+        ;
 RUN mkdir -p /usr/local/src/blockchain
 WORKDIR /usr/local/src/blockchain
 COPY ./src /usr/local/src/blockchain/
@@ -15,4 +17,4 @@ RUN adduser -D user
 USER user
 
 
-CMD ["python", "blockchain.py"]
+CMD ["python", "app.py"]
